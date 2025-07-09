@@ -1,0 +1,420 @@
+# YTM Group Website Redesign - Product Requirements Document
+
+<context>
+# Overview
+
+YTM Group is a comprehensive financial services business operating across Australia, offering mortgage and finance solutions, financial planning, legal services, business insurance, business advisory, and property services. Their current website at ytmgroup.com.au lacks modern design elements, has poor user experience, and limited visual engagement compared to contemporary financial services websites.
+
+This project aims to completely redesign and redevelop their website using modern technologies (React, TypeScript, Tailwind CSS) to create a professional, trustworthy, and refined digital presence that enhances brand credibility, improves user experience, increases lead generation, and positions YTM Group as a forward-thinking financial services provider while maintaining their core brand identity.
+
+The solution addresses the critical need for a modern web presence that converts visitors into leads through improved user experience, professional design, and clear value proposition communication.
+
+# Core Features
+
+## Professional Homepage with Hero Section
+- **What it does**: Creates immediate impact with compelling value proposition and clear calls-to-action
+- **Why it's important**: First impression determines visitor engagement and trust establishment
+- **How it works**: Clean hero section with professional imagery, trust indicators, and prominent "Free Strategy Call" booking
+
+## Comprehensive Services Showcase
+- **What it does**: Presents all six core services (Lending, Financial Planning, Legal Services, Business Insurance, Business Advisory, Property) in an organized, accessible format
+- **Why it's important**: Visitors need to quickly understand the full scope of services offered
+- **How it works**: Interactive grid layout with service icons, descriptions, and dedicated detail pages for each service
+
+## Trust Building Elements
+- **What it does**: Establishes credibility through testimonials, certifications, and company credentials
+- **Why it's important**: Financial services require high trust levels for conversion
+- **How it works**: Strategically placed client testimonials, years of experience, certifications, and professional team profiles
+
+## Lead Generation System
+- **What it does**: Captures visitor information and converts them into qualified leads
+- **Why it's important**: Primary business objective is to generate new client inquiries
+- **How it works**: Multiple contact forms, prominent call-to-action buttons, and "Free Strategy Call" booking system
+
+## Content Hub (Insights/News)
+- **What it does**: Positions YTM Group as thought leaders through valuable content
+- **Why it's important**: Builds authority and provides ongoing value to visitors
+- **How it works**: Blog-style section with financial insights, market updates, and educational content
+
+## Mobile-First Experience
+- **What it does**: Ensures optimal experience across all devices
+- **Why it's important**: Majority of users browse on mobile devices
+- **How it works**: Responsive design with touch-friendly interactions and fast loading times
+
+# User Experience
+
+## User Personas
+
+### Primary: Individual Investors & Financial Planning Clients
+- **Demographics**: Ages 25-55, middle to high-income earners
+- **Goals**: Building wealth, financial security, retirement planning
+- **Pain Points**: Difficulty navigating complex financial options, need for trusted advice
+- **User Journey**: Research → Service exploration → Contact → Consultation booking
+
+### Secondary: Business Owners & Entrepreneurs
+- **Demographics**: SME owners, startups, established businesses
+- **Goals**: Business growth, financial optimization, risk management
+- **Pain Points**: Time constraints, need for integrated financial solutions
+- **User Journey**: Problem identification → Solution research → Expert consultation
+
+### Tertiary: Property Investors
+- **Demographics**: First-time homebuyers to experienced investors
+- **Goals**: Property acquisition, investment strategy, mortgage optimization
+- **Pain Points**: Complex lending requirements, market navigation
+- **User Journey**: Property research → Finance options → Application process
+
+## Key User Flows
+
+### Primary Flow: Service Discovery to Lead Conversion
+1. **Landing**: Visitor arrives via search/referral
+2. **Exploration**: Browse homepage hero and services overview
+3. **Investigation**: Click into specific service pages
+4. **Trust Building**: Review testimonials and team credentials
+5. **Action**: Complete contact form or book strategy call
+
+### Secondary Flow: Content Engagement
+1. **Content Discovery**: Find insights/news section
+2. **Content Consumption**: Read articles and guides
+3. **Authority Recognition**: Perceive YTM Group as experts
+4. **Engagement**: Contact for personalized advice
+
+## UI/UX Considerations
+
+### Visual Design Principles
+- **Professional Aesthetic**: Clean, sophisticated design that instills confidence
+- **Clear Hierarchy**: Strategic use of typography, whitespace, and color
+- **Consistent Branding**: Maintain existing brand colors and logo
+- **Subtle Interactions**: Enhance experience without being flashy
+
+### Navigation Strategy
+- **Intuitive Structure**: Logical menu organization with clear labels
+- **Progressive Disclosure**: Information revealed as needed to avoid overwhelm
+- **Multiple Contact Points**: CTAs strategically placed throughout the journey
+- **Breadcrumb Navigation**: Clear path tracking for complex user journeys
+
+</context>
+
+<PRD>
+
+# Technical Architecture
+
+## System Components
+
+### Frontend Framework
+- **React 18+**: Component-based architecture for maintainable, scalable development
+- **TypeScript**: Type safety for reduced bugs and improved developer experience
+- **Tailwind CSS**: Utility-first CSS framework for rapid, consistent styling
+
+### Build and Development Tools
+- **Vite**: Fast development server and optimized production builds
+- **React Router**: Client-side routing for single-page application experience
+- **ESLint & Prettier**: Code quality and formatting consistency
+
+### Performance Optimization
+- **Code Splitting**: Dynamic imports for optimal bundle sizes
+- **Lazy Loading**: Components and images loaded on demand
+- **Image Optimization**: WebP format with fallbacks, responsive images
+- **Tree Shaking**: Eliminate unused code from final bundles
+
+## Data Models
+
+### Content Structure (TypeScript Interfaces)
+```typescript
+interface Service {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  icon: string;
+  detailContent: string;
+}
+
+interface TeamMember {
+  name: string;
+  position: string;
+  bio: string;
+  image: string;
+  credentials: string[];
+}
+
+interface Testimonial {
+  client: string;
+  content: string;
+  service: string;
+  rating: number;
+}
+
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  publishDate: Date;
+  category: string;
+  author: string;
+}
+```
+
+### Component Architecture
+- **Atomic Design**: Atoms (buttons, inputs) → Molecules (forms, cards) → Organisms (sections) → Templates → Pages
+- **Reusable Components**: Header, Footer, ServiceCard, TestimonialCard, ContactForm
+- **Layout Components**: PageLayout, Section, Container for consistent structure
+
+## APIs and Integrations
+
+### Contact Form Handling
+- **Form Submission**: Client-side validation with server-side processing
+- **Email Integration**: Automated email notifications to YTM Group
+- **Lead Tracking**: Integration with existing CRM or email system
+
+### SEO Implementation
+- **Meta Tags**: Dynamic meta titles and descriptions
+- **Structured Data**: JSON-LD schema markup for local business
+- **Sitemap Generation**: Automated XML sitemap creation
+- **Open Graph**: Social media sharing optimization
+
+## Infrastructure Requirements
+
+### Hosting Environment
+- **Static Site Hosting**: Vercel, Netlify, or similar for React SPA
+- **CDN**: Global content delivery for fast loading worldwide
+- **SSL Certificate**: HTTPS encryption for security and SEO
+
+### Security Considerations
+- **Content Security Policy**: Prevent XSS attacks
+- **Form Security**: CSRF protection and input validation
+- **Secure Headers**: Security-focused HTTP headers
+
+# Development Roadmap
+
+## MVP Phase: Core Website Foundation
+**Scope**: Essential pages and functionality for immediate business needs
+
+### MVP Components
+- **Homepage**: Hero section, services overview, basic contact form
+- **Service Pages**: Individual pages for each of the 6 core services
+- **About Page**: Company story, team profiles, values
+- **Contact Page**: Contact form, office information, map integration
+- **Basic Layout**: Header with navigation, footer with essential links
+
+### MVP Features
+- **Responsive Design**: Mobile-first approach across all pages
+- **Contact Forms**: Lead capture with email notifications
+- **SEO Basics**: Meta tags, clean URLs, basic schema markup
+- **Performance**: Optimized images, fast loading times
+
+## Enhancement Phase: Advanced Features and Content
+**Scope**: Additional functionality to improve user engagement and conversion
+
+### Enhanced Features
+- **Insights/News Section**: Blog-style content management
+- **Advanced Contact Forms**: Service-specific forms with conditional fields
+- **Testimonials Section**: Client success stories and reviews
+- **Interactive Elements**: Hover effects, smooth scrolling, micro-animations
+- **Advanced SEO**: Comprehensive schema markup, sitemap
+
+### Content Expansion
+- **Detailed Service Content**: In-depth service descriptions and processes
+- **Resource Library**: Downloadable guides and tools
+- **Case Studies**: Detailed client success stories
+- **FAQ Section**: Common questions and answers
+
+## Future Enhancements: Advanced Functionality
+**Scope**: Long-term improvements for competitive advantage
+
+### Advanced Features
+- **Client Portal**: Secure login area for existing clients
+- **Online Booking System**: Calendar integration for strategy calls
+- **Live Chat Integration**: Real-time customer support
+- **Email Newsletter**: Automated email marketing system
+- **Analytics Dashboard**: Detailed visitor behavior tracking
+
+### Content and Marketing
+- **Video Content**: Service explanations and testimonials
+- **Podcast Integration**: Financial advice and industry insights
+- **Social Media Integration**: Live feeds and sharing capabilities
+- **Multi-language Support**: Accessibility for diverse client base
+
+# Logical Dependency Chain
+
+## Foundation Layer (Build First)
+**Priority: Critical - Must be completed before other development**
+
+1. **Project Setup and Configuration**
+   - Initialize React/TypeScript/Tailwind project
+   - Configure build tools (Vite) and development environment
+   - Set up code quality tools (ESLint, Prettier)
+   - Establish folder structure and component architecture
+
+2. **Core Components and Layout System**
+   - Create base layout components (Header, Footer, Container)
+   - Develop design system components (Button, Input, Card)
+   - Implement responsive grid system with Tailwind
+   - Build reusable typography and spacing utilities
+
+3. **Navigation and Routing**
+   - Set up React Router for page navigation
+   - Create main navigation component
+   - Implement mobile menu functionality
+   - Establish breadcrumb system
+
+## Visible Frontend Layer (Quick Win - Build Second)
+**Priority: High - Creates immediately visible progress**
+
+4. **Homepage Foundation**
+   - Hero section with value proposition
+   - Basic services overview grid
+   - Simple contact form
+   - Trust indicators section
+
+5. **Basic Service Pages**
+   - Service page template component
+   - Individual service content implementation
+   - Service-to-service navigation
+   - Basic call-to-action elements
+
+6. **Essential Pages**
+   - About Us page with team information
+   - Contact page with form and details
+   - Basic footer with company information
+
+## Functionality Layer (Build Third)
+**Priority: Medium - Adds interactive functionality**
+
+7. **Form Functionality**
+   - Contact form validation and submission
+   - Email integration for lead notifications
+   - Form success/error states
+   - Service-specific form variations
+
+8. **SEO and Performance**
+   - Meta tag implementation
+   - Image optimization and lazy loading
+   - Code splitting for performance
+   - Basic schema markup
+
+9. **Interactive Elements**
+   - Hover effects and micro-animations
+   - Smooth scrolling navigation
+   - Mobile touch interactions
+   - Loading states and transitions
+
+## Enhancement Layer (Build Fourth)
+**Priority: Low - Improves user experience and conversion**
+
+10. **Content Management**
+    - Insights/News section structure
+    - Blog post template and listing
+    - Content categorization system
+    - Search functionality
+
+11. **Trust Building Features**
+    - Testimonials section
+    - Client success stories
+    - Credentials and certifications display
+    - Social proof elements
+
+12. **Advanced Functionality**
+    - Advanced contact forms
+    - Calendar booking integration
+    - Live chat implementation
+    - Analytics tracking
+
+# Risks and Mitigations
+
+## Technical Challenges
+
+### Risk: Performance Issues with React SPA
+- **Mitigation**: Implement code splitting, lazy loading, and image optimization from the start
+- **Monitoring**: Regular performance testing with Lighthouse and Core Web Vitals
+- **Fallback**: Progressive loading strategies and critical resource prioritization
+
+### Risk: SEO Challenges with Client-Side Rendering
+- **Mitigation**: Use Next.js if SEO becomes critical, implement proper meta tags and schema markup
+- **Monitoring**: Regular SEO audits and search ranking tracking
+- **Fallback**: Server-side rendering implementation if needed
+
+### Risk: Browser Compatibility Issues
+- **Mitigation**: Use modern build tools with automatic polyfills, test across major browsers
+- **Monitoring**: Cross-browser testing throughout development
+- **Fallback**: Progressive enhancement approach for older browsers
+
+## MVP and Scope Management
+
+### Risk: Feature Creep and Scope Expansion
+- **Mitigation**: Strict adherence to defined MVP scope, clear phase boundaries
+- **Monitoring**: Regular scope reviews and stakeholder communication
+- **Fallback**: Phase-based development allows for scope adjustment between phases
+
+### Risk: Perfectionism Delaying Launch
+- **Mitigation**: Define "good enough" criteria for MVP launch
+- **Monitoring**: Set clear completion criteria for each phase
+- **Fallback**: Launch MVP and iterate based on user feedback
+
+### Risk: Content Creation Bottlenecks
+- **Mitigation**: Start with existing content, improve iteratively
+- **Monitoring**: Content creation timeline tracking
+- **Fallback**: Placeholder content for initial launch, real content updates post-launch
+
+## Resource and Development Constraints
+
+### Risk: Single Developer Dependency
+- **Mitigation**: Clear documentation, modular code architecture
+- **Monitoring**: Regular code commits and backup procedures
+- **Fallback**: Code review processes and knowledge sharing documentation
+
+### Risk: Technology Learning Curve
+- **Mitigation**: Start with familiar patterns, gradually introduce advanced features
+- **Monitoring**: Track development velocity and identify bottlenecks
+- **Fallback**: Simplify implementation if complexity becomes blocking
+
+### Risk: Client Feedback Integration Delays
+- **Mitigation**: Regular demos and feedback sessions throughout development
+- **Monitoring**: Feedback response time tracking
+- **Fallback**: Implement core functionality first, iterate on feedback in enhancement phases
+
+# Appendix
+
+## Research Findings
+
+### Current Website Analysis
+- **Design Issues**: Outdated visual design, poor mobile experience, unclear navigation
+- **Content Problems**: Inconsistent messaging, buried contact information, weak value proposition
+- **Technical Limitations**: Slow loading times, poor SEO optimization, limited functionality
+
+### Competitive Analysis (Solaris Finance Reference)
+- **Design Strengths**: Clean layout, professional color scheme, clear information hierarchy
+- **UX Patterns**: Prominent CTAs, trust indicators, service categorization
+- **Technical Implementation**: Fast loading, mobile-optimized, clear navigation
+
+### Target Audience Research
+- **User Preferences**: Mobile-first browsing, quick access to contact information, clear service explanations
+- **Trust Factors**: Professional design, client testimonials, clear credentials
+- **Conversion Patterns**: Multi-touch journey from research to contact
+
+## Technical Specifications
+
+### Browser Support
+- **Modern Browsers**: Chrome 90+, Firefox 90+, Safari 14+, Edge 90+
+- **Mobile Support**: iOS Safari 14+, Android Chrome 90+
+- **Progressive Enhancement**: Basic functionality for older browsers
+
+### Performance Targets
+- **Loading Speed**: Under 3 seconds initial load
+- **Core Web Vitals**: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- **Bundle Size**: Main bundle < 200KB gzipped
+- **Image Optimization**: WebP with JPEG fallbacks, responsive images
+
+### Accessibility Requirements
+- **WCAG 2.1 AA Compliance**: Keyboard navigation, screen reader support
+- **Color Contrast**: Minimum 4.5:1 ratio for normal text
+- **Focus Management**: Clear focus indicators and logical tab order
+- **Semantic HTML**: Proper heading hierarchy and landmark elements
+
+### SEO Implementation
+- **Meta Tags**: Dynamic titles and descriptions for all pages
+- **Schema Markup**: Local business, organization, and service schemas
+- **XML Sitemap**: Automated generation and submission
+- **Robots.txt**: Proper crawling directives
+
+</PRD>
