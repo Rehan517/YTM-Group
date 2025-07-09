@@ -106,8 +106,6 @@ const LegalServicesPage: React.FC = () => {
       service={legalService}
       processSteps={processSteps}
       additionalContent={additionalContent}
-      contactForm={contactForm}
-      businessStage="startup" // Legal services are often needed for new businesses
     />
   );
 };

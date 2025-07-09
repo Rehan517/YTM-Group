@@ -52,36 +52,20 @@ const LendingPage: React.FC = () => {
     ]
   };
 
-  // Get related services (excluding current service)
-  const relatedServices = [
-    getServiceById('financial-planning'),
-    getServiceById('business-insurance'),
-    getServiceById('property')
-  ].filter((service): service is NonNullable<typeof service> => service !== undefined);
+  // Get related services (excluding current service) - REMOVED: Now handled by GetStartedCTA
+  // const relatedServices = [...] - REMOVED
 
-  // Handle form submission
-  const handleFormSubmit = async (data: any) => {
-    console.log('Lending form submission:', data);
-    // TODO: Implement actual form submission logic
-    alert('Thank you for your inquiry! We will contact you within 24 hours.');
-  };
+  // Handle form submission - REMOVED: Now handled by GetStartedCTA
+  // const handleFormSubmit = async (data: any) => {...} - REMOVED
 
-  // Create the contact form component
-  const contactForm = (
-    <ServiceContactForm
-      serviceId="lending"
-      serviceName="Lending Solutions"
-      onSubmit={handleFormSubmit}
-    />
-  );
+  // Create the contact form component - REMOVED: Now handled by GetStartedCTA
+  // const contactForm = (...) - REMOVED
 
   return (
     <ServicePage
       service={lendingService}
       processSteps={processSteps}
       additionalContent={additionalContent}
-      contactForm={contactForm}
-      relatedServices={relatedServices}
     />
   );
 };

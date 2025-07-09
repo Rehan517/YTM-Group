@@ -15,11 +15,19 @@ export { default as Header } from './organisms/Header';
 export { default as Footer } from './organisms/Footer';
 
 // Sections
-export { default as SmartCrossSellingSection } from './sections/SmartCrossSellingSection';
-export { default as ConversionOptimizationSection } from './sections/ConversionOptimizationSection';
+export { default as Hero } from './sections/Hero';
+export { default as ServicesGrid } from './sections/ServicesGrid';
+export { default as GetStartedCTA } from './sections/GetStartedCTA';
 
 // Template Components
 export { default as ServicePage } from './templates/ServicePage';
 
 // Form Components
-export { default as ServiceContactForm } from './forms/ServiceContactForm'; 
+export { default as ServiceContactForm } from './forms/ServiceContactForm';
+
+// SEO Components
+export { 
+  BusinessStructuredData, 
+  WebPageStructuredData, 
+  BreadcrumbStructuredData 
+} from './seo'; 

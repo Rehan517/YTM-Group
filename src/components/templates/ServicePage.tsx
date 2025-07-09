@@ -2,9 +2,8 @@ import React from 'react';
 import { cn } from '@/utils';
 import Container from '@/components/layout/Container';
 import { CheckCircleIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
-import { SmartCrossSellingSection, ConversionOptimizationSection } from '@/components';
+import { GetStartedCTA } from '@/components';
 import type { Service } from '@/types/services';
-import type { BusinessLifecycleStage } from '@/config/cross-selling.config';
 
 interface ProcessStep {
   id: string;
@@ -24,9 +23,6 @@ interface ServicePageProps {
       answer: string;
     }>;
   };
-  contactForm?: React.ReactNode;
-  relatedServices?: Service[]; // Keep for backward compatibility
-  businessStage?: BusinessLifecycleStage;
   className?: string;
 }
 
@@ -34,9 +30,6 @@ const ServicePage: React.FC<ServicePageProps> = ({
   service,
   processSteps = [],
   additionalContent,
-  contactForm,
-  relatedServices = [], // Deprecated: kept for backward compatibility
-  businessStage = 'growth',
   className
 }) => {
   const { icon: Icon, title, description, features = [], benefits = [], color, bgColor } = service;
@@ -246,34 +239,8 @@ const ServicePage: React.FC<ServicePageProps> = ({
       )}
 
       {/* Contact Form Section */}
-      {contactForm && (
-        <section className="py-16 lg:py-24 bg-neutral-50">
-          <Container size="2xl">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
-                  Get Started Today
-                </h2>
-                <p className="text-lg text-slate-600">
-                  Ready to take the next step? Contact us for a personalized consultation.
-                </p>
-              </div>
-              {contactForm}
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* Conversion Optimization Section - CTAs and persuasion elements */}
-      <ConversionOptimizationSection 
-        serviceId={service.id}
-        variant="enhanced"
-      />
-
-      {/* Smart Cross-Selling Section - Replaces old Related Services */}
-      <SmartCrossSellingSection 
-        currentServiceId={service.id}
-        businessStage={businessStage || 'growth'}
+      <GetStartedCTA 
+        service={service}
       />
     </div>
   );

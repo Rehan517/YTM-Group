@@ -85,36 +85,20 @@ const BusinessAdvisoryPage: React.FC = () => {
     ]
   };
 
-  // Get related services (excluding current service)
-  const relatedServices = [
-    getServiceById('financial-planning'),
-    getServiceById('legal-services'),
-    getServiceById('business-insurance')
-  ].filter((service): service is NonNullable<typeof service> => service !== undefined);
+  // Get related services (excluding current service) - REMOVED: Now handled by GetStartedCTA
+  // const relatedServices = [...] - REMOVED
 
-  // Handle form submission
-  const handleFormSubmit = async (data: any) => {
-    console.log('Business Advisory form submission:', data);
-    // TODO: Implement actual form submission logic
-    alert('Thank you for your business advisory inquiry! One of our senior consultants will contact you within 24 hours to discuss your business needs.');
-  };
+  // Handle form submission - REMOVED: Now handled by GetStartedCTA
+  // const handleFormSubmit = async (data: any) => {...} - REMOVED
 
-  // Create the contact form component
-  const contactForm = (
-    <ServiceContactForm
-      serviceId="business-advisory"
-      serviceName="Business Advisory"
-      onSubmit={handleFormSubmit}
-    />
-  );
+  // Create the contact form component - REMOVED: Now handled by GetStartedCTA
+  // const contactForm = (...) - REMOVED
 
   return (
     <ServicePage
       service={businessAdvisoryService}
       processSteps={processSteps}
       additionalContent={additionalContent}
-      contactForm={contactForm}
-      relatedServices={relatedServices}
     />
   );
 };

@@ -85,36 +85,20 @@ const PropertyServicesPage: React.FC = () => {
     ]
   };
 
-  // Get related services (excluding current service)
-  const relatedServices = [
-    getServiceById('financial-planning'),
-    getServiceById('business-advisory'),
-    getServiceById('legal-services')
-  ].filter((service): service is NonNullable<typeof service> => service !== undefined);
+  // Get related services (excluding current service) - REMOVED: Now handled by GetStartedCTA
+  // const relatedServices = [...] - REMOVED
 
-  // Handle form submission
-  const handleFormSubmit = async (data: any) => {
-    console.log('Property Services form submission:', data);
-    // TODO: Implement actual form submission logic
-    alert('Thank you for your property inquiry! One of our property specialists will contact you within 24 hours to discuss your property needs.');
-  };
+  // Handle form submission - REMOVED: Now handled by GetStartedCTA
+  // const handleFormSubmit = async (data: any) => {...} - REMOVED
 
-  // Create the contact form component
-  const contactForm = (
-    <ServiceContactForm
-      serviceId="property-services"
-      serviceName="Property Services"
-      onSubmit={handleFormSubmit}
-    />
-  );
+  // Create the contact form component - REMOVED: Now handled by GetStartedCTA
+  // const contactForm = (...) - REMOVED
 
   return (
     <ServicePage
       service={propertyService}
       processSteps={processSteps}
       additionalContent={additionalContent}
-      contactForm={contactForm}
-      relatedServices={relatedServices}
     />
   );
 };

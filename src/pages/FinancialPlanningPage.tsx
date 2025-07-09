@@ -98,8 +98,6 @@ const FinancialPlanningPage: React.FC = () => {
       service={financialPlanningService}
       processSteps={processSteps}
       additionalContent={additionalContent}
-      contactForm={contactForm}
-      businessStage="established" // Financial planning is typically for established businesses/individuals
     />
   );
 };
