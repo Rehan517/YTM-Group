@@ -1,248 +1,253 @@
 import React from 'react';
 import { cn } from '@/utils';
 import Container from '@/components/layout/Container';
-import { CheckCircleIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
-import { GetStartedCTA } from '@/components';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { SEOHead, ReviewsSection, StrategyCTA } from '@/components';
+import { getSEOData, generateBreadcrumbs } from '@/config/seo.config';
 import type { Service } from '@/types/services';
+import { Link } from 'react-router-dom';
 
-interface ProcessStep {
-  id: string;
+export interface ServiceOption {
   title: string;
   description: string;
-  icon?: React.ReactNode;
+  icon?: string; // URL to icon image
+  tags?: string[]; // Optional tags/badges for the option
 }
 
 interface ServicePageProps {
   service: Service;
-  processSteps?: ProcessStep[];
-  additionalContent?: {
-    overview?: string;
-    whyChooseUs?: string[];
-    faqs?: Array<{
-      question: string;
-      answer: string;
-    }>;
-  };
+  serviceOptions?: ServiceOption[]; // New service options cards
+  heroImage?: string; // Optional hero image URL
   className?: string;
 }
 
 const ServicePage: React.FC<ServicePageProps> = ({
   service,
-  processSteps = [],
-  additionalContent,
+  serviceOptions = [],
+  heroImage,
   className
 }) => {
-  const { icon: Icon, title, description, features = [], benefits = [], color, bgColor } = service;
+  const { title, description, bgColor, href } = service;
+
+  // Get SEO data for this service page
+  const serviceKey = href.replace('/services/', '');
+  const seoData = getSEOData(`services.${serviceKey}`);
+  const breadcrumbs = generateBreadcrumbs(href);
 
   return (
-    <div className={cn('min-h-screen bg-white', className)}>
-      {/* Service Hero Section */}
-      <section className={cn('relative py-16 lg:py-24', bgColor.replace('bg-', 'bg-').replace('-50', '-100'))}>
-        <Container size="2xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Hero Content */}
-            <div className="space-y-6">
-              {/* Service Icon */}
-              <div className={cn('inline-flex items-center justify-center w-16 h-16 rounded-2xl', bgColor)}>
-                <Icon className={cn('w-8 h-8', color)} />
-              </div>
+    <>
+      {/* SEO Meta Tags */}
+      <SEOHead
+        title={seoData.title}
+        description={seoData.description}
+        keywords={seoData.keywords}
+        canonical={seoData.canonical}
+        ogImage={seoData.ogImage}
+        ogType={seoData.ogType}
+        twitterCard={seoData.twitterCard}
+        structuredData={[breadcrumbs, seoData.structuredData].filter(Boolean)}
+      />
 
-              {/* Service Title */}
-              <div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight mb-4">
-                  {title}
-                </h1>
-                <div className="w-20 h-1 bg-primary-600 mb-6"></div>
-              </div>
-
-              {/* Service Description */}
-              <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
-                {description}
-              </p>
-
-              {/* Quick Benefits */}
-              {benefits.length > 0 && (
-                <div className="space-y-3">
-                  {benefits.slice(0, 3).map((benefit, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircleIcon className="w-5 h-5 text-green-600 flex-shrink-0" />
-                      <span className="text-slate-700">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Hero CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="inline-flex items-center justify-center px-8 py-4 text-base lg:text-lg font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
-                  Get Started
-                  <ArrowRightIcon className="w-5 h-5 ml-2" />
-                </button>
-                <button className="inline-flex items-center justify-center px-8 py-4 text-base lg:text-lg font-medium text-primary-600 bg-white hover:bg-primary-50 border border-primary-600 rounded-lg transition-colors duration-200">
-                  Learn More
-                </button>
-              </div>
-            </div>
-
-            {/* Hero Image Placeholder */}
-            <div className="relative">
-              <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-2xl">
-                <div className={cn(
-                  'w-full h-96 lg:h-[480px] flex items-center justify-center',
-                  'bg-gradient-to-br from-primary-100 to-primary-200'
-                )}>
-                  <div className="text-center text-primary-600">
-                    <Icon className="w-20 h-20 mx-auto mb-4" />
-                    <p className="text-lg font-medium">{title}</p>
-                    <p className="text-sm opacity-75">Professional Service Image</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Service Overview Section */}
-      {additionalContent?.overview && (
-        <section className="py-16 lg:py-24 bg-neutral-50">
+      <div className={cn('min-h-screen bg-white', className)}>
+        {/* Service Hero Section */}
+        <section className={cn('relative py-8 sm:py-12 lg:py-20', bgColor.replace('bg-', 'bg-').replace('-50', '-100'))}>
           <Container size="2xl">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-8 text-center">
-                Service Overview
-              </h2>
-              <div className="prose prose-lg max-w-none text-slate-600">
-                <p>{additionalContent.overview}</p>
-              </div>
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* Features & Benefits Section */}
-      {(features.length > 0 || benefits.length > 0) && (
-        <section className="py-16 lg:py-24">
-          <Container size="2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-              {/* Features */}
-              {features.length > 0 && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-start lg:items-center">
+              {/* Hero Content */}
+              <div className="space-y-5 sm:space-y-6 lg:space-y-8">
+                {/* Service Title */}
                 <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-8">
-                    What's Included
-                  </h2>
-                  <div className="space-y-4">
-                    {features.map((feature, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <CheckCircleIcon className="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5" />
-                        <span className="text-slate-700 text-lg">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <h1 className="text-4xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-800 leading-tight mb-3 sm:mb-4 lg:mb-6">
+                    {title}
+                  </h1>
+                  <div className="w-16 sm:w-20 h-1 bg-primary-600 mb-4 sm:mb-6"></div>
                 </div>
-              )}
 
-              {/* Benefits */}
-              {benefits.length > 0 && (
-                <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-8">
-                    Key Benefits
-                  </h2>
-                  <div className="space-y-4">
-                    {benefits.map((benefit, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <div className={cn('w-6 h-6 rounded-full flex-shrink-0 mt-0.5', bgColor)}>
-                          <Icon className={cn('w-4 h-4 m-1', color)} />
+                {/* Service Description */}
+                <p className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
+                  {description}
+                </p>
+
+                {/* Hero Image - Mobile Only (above button) */}
+                <div className="relative lg:hidden">
+                  {heroImage ? (
+                    /* Clean 3D element for mobile */
+                    <img 
+                      src={heroImage} 
+                      alt={title}
+                      className="w-full max-w-sm mx-auto h-auto object-contain"
+                    />
+                  ) : (
+                    /* Placeholder for mobile */
+                    <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-2xl max-w-sm mx-auto">
+                      <div className={cn(
+                        'w-full h-64 flex items-center justify-center',
+                        'bg-gradient-to-br from-primary-100 to-primary-200'
+                      )}>
+                        <div className="text-center text-primary-600">
+                          <p className="text-base font-medium">{title}</p>
+                          <p className="text-xs opacity-75">Professional Service Image</p>
                         </div>
-                        <span className="text-slate-700 text-lg">{benefit}</span>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* Process Steps Section */}
-      {processSteps.length > 0 && (
-        <section className="py-16 lg:py-24 bg-neutral-50">
-          <Container size="2xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
-                Our Process
-              </h2>
-              <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                We follow a structured approach to ensure you get the best possible service and results.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {processSteps.map((step, index) => (
-                <div key={step.id} className="relative">
-                  {/* Step Number */}
-                  <div className="absolute -top-4 -left-4 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold z-10">
-                    {index + 1}
-                  </div>
-
-                  {/* Step Card */}
-                  <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 h-full">
-                    {step.icon && (
-                      <div className="mb-4">
-                        {step.icon}
-                      </div>
-                    )}
-                    <h3 className="text-xl font-bold text-slate-800 mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-slate-600">
-                      {step.description}
-                    </p>
-                  </div>
-
-                  {/* Connector Line (hidden on last item) */}
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-12 -right-4 w-8 h-px bg-neutral-300"></div>
+                    </div>
                   )}
                 </div>
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
 
-      {/* Why Choose Us Section */}
-      {additionalContent?.whyChooseUs && additionalContent.whyChooseUs.length > 0 && (
-        <section className="py-16 lg:py-24">
-          <Container size="2xl">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-800 mb-4">
-                Why Choose YTM Group?
-              </h2>
-              <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Our commitment to excellence sets us apart in the industry.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {additionalContent.whyChooseUs.map((reason, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <CheckCircleIcon className="w-5 h-5 text-primary-600" />
-                  </div>
-                  <p className="text-slate-700 text-lg">{reason}</p>
+                {/* Hero CTAs */}
+                <div className="flex justify-start pt-2 sm:pt-4">
+                  <Link to="/contact">
+                  <button className="inline-flex items-center justify-center px-6 sm:px-8 lg:px-12 py-3 sm:py-4 text-base sm:text-lg font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl">
+                    Get Started
+                    <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
+                  </button>
+                  </Link>
+                  
                 </div>
-              ))}
+              </div>
+
+              {/* Hero Image - Desktop Only */}
+              <div className="relative hidden lg:block">
+                {heroImage ? (
+                  /* Clean 3D element without container styling */
+                  <img 
+                    src={heroImage} 
+                    alt={title}
+                    className="w-full h-96 lg:h-[480px] object-contain"
+                  />
+                ) : (
+                  /* Placeholder with container styling */
+                  <div className="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-2xl">
+                    <div className={cn(
+                      'w-full h-96 lg:h-[480px] flex items-center justify-center',
+                      'bg-gradient-to-br from-primary-100 to-primary-200'
+                    )}>
+                      <div className="text-center text-primary-600">
+                        <p className="text-lg font-medium">{title}</p>
+                        <p className="text-sm opacity-75">Professional Service Image</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </Container>
         </section>
-      )}
 
-      {/* Contact Form Section */}
-      <GetStartedCTA 
-        service={service}
-      />
-    </div>
+
+
+        {/* Service Options Section */}
+        {serviceOptions.length > 0 && (
+          <section className="py-8 sm:py-12 lg:py-20 bg-neutral-50">
+            <Container size="2xl">
+              <div className="text-center max-w-4xl mx-auto mb-12 sm:mb-16">
+                <h2 className="text-4xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-800 mb-4 sm:mb-6">
+                  Service Options
+                </h2>
+                <p className="text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed">
+                  Our {title.toLowerCase()} are designed to help you achieve your property and investment goals with competitive rates and flexible terms. Whether you're a first-time homebuyer, seasoned investor, or business owner looking for commercial financing, our experienced team provides personalised service throughout the entire process.
+                </p>
+              </div>
+
+              {/* Service Options Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                {serviceOptions.map((option, index) => {
+                  // Create abbreviated description for mobile (first sentence or up to 80 characters)
+                  const mobileDescription = option.description.length > 80 
+                    ? option.description.split('.')[0] + (option.description.includes('.') ? '.' : '...')
+                    : option.description;
+                  
+                  // Limit tags shown on mobile (first 2 tags)
+                  const mobileTags = option.tags ? option.tags.slice(0, 2) : [];
+                  
+                  return (
+                    <div key={index} className="bg-white rounded-xl p-3 sm:p-4 lg:p-6 shadow-sm hover:shadow-md transition-shadow border border-neutral-100 flex flex-col h-full">
+                      {/* Option Icon */}
+                      {option.icon && (
+                        <div className="mb-3 sm:mb-4 lg:mb-6">
+                          <img 
+                            src={option.icon} 
+                            alt={`${option.title} icon`}
+                            className="w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 object-contain"
+                          />
+                        </div>
+                      )}
+
+                      {/* Option Title */}
+                      <h3 className="text-sm sm:text-lg lg:text-xl font-bold text-slate-800 mb-2 sm:mb-3 lg:mb-4 leading-tight">
+                        {option.title}
+                      </h3>
+
+                      {/* Option Description - Responsive content */}
+                      <div className="mb-3 sm:mb-4 lg:mb-6">
+                        <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed sm:hidden">
+                          {mobileDescription}
+                        </p>
+                        <p className="text-sm lg:text-base text-slate-600 leading-relaxed hidden sm:block">
+                          {option.description}
+                        </p>
+                      </div>
+
+                      {/* Option Tags - Responsive display */}
+                      {option.tags && option.tags.length > 0 && (
+                        <div className="mb-3 sm:mb-4 lg:mb-6">
+                          {/* Mobile tags (first 2) */}
+                          <div className="flex flex-wrap gap-1 sm:hidden">
+                            {mobileTags.map((tag, tagIndex) => (
+                              <span 
+                                key={tagIndex}
+                                className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          {/* Desktop tags (all) */}
+                          <div className="hidden sm:flex flex-wrap gap-1 lg:gap-2">
+                            {option.tags.map((tag, tagIndex) => (
+                              <span 
+                                key={tagIndex}
+                                className="inline-flex items-center px-2 lg:px-3 py-1 rounded-full text-xs lg:text-sm font-medium bg-primary-100 text-primary-700"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* CTA Button - pushed to bottom */}
+                      <div className="mt-auto pt-2 sm:pt-3 lg:pt-4 border-t border-neutral-100">
+                        <Link to="/contact"> 
+                        <button className="inline-flex items-center justify-center px-2 sm:px-4 lg:px-6 py-1.5 sm:py-2 lg:py-3 text-xs sm:text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-lg transition-colors duration-200 w-full">
+                          
+                          <span>Find out more</span>
+                        </button>
+                        </Link>
+                        
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </Container>
+          </section>
+        )}
+
+
+
+
+
+
+
+
+        {/* Reviews Section */}
+        <ReviewsSection />
+
+        {/* Strategy CTA Section */}
+        <StrategyCTA />
+
+      </div>
+    </>
   );
 };
 

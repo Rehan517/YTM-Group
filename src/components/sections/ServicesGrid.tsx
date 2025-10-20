@@ -66,7 +66,7 @@ const ServicesGrid: React.FC<ServicesGridProps> = ({
           <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
             Our Services
           </h2>
-          <p className="text-neutral-600 text-lg lg:text-xl max-w-3xl">
+          <p className="text-neutral-600 text-base sm:text-lg lg:text-xl max-w-3xl">
             Comprehensive financial and legal services designed to help you build and protect your wealth for generations.
           </p>
         </div>

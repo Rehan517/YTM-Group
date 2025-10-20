@@ -23,8 +23,7 @@ export { default as YTMLogo } from './logos/YTM-FWP-Logo-Final-1024x623-1-980x59
 // =============================================================================
 
 // Hero Section Images
-export { default as HeroImage } from './hero/Main-Image.jpg';
-export { default as SecondaryHeroImage } from './hero/Secondary-Image.jpg';
+export { default as HeroPNG } from './images/hero.png';
 // export { default as HeroImageWebP } from './hero/professional-team.webp';
 // export { default as OfficeImage } from './hero/office-exterior.jpg';
 
@@ -33,6 +32,16 @@ export { default as SecondaryHeroImage } from './hero/Secondary-Image.jpg';
 // =============================================================================
 
 // Service Category Images
+export { default as LendingImage } from './services/lending.png';
+export { default as FinancialImage } from './services/financial-planning.png';
+export { default as LegalImage } from './services/legal.png';
+export { default as BusinessInsuranceImage } from './services/business-insurance.png';
+export { default as BusinessAdvisoryImage } from './services/business-advisory.png';
+export { default as PropertyServicesImage } from './services/property-services.png';
+export { default as UnderOneRoofImage } from './images/under-one-roof.png';
+export { default as RateReviewImage } from './images/ytm-rate-review.png';
+export { default as FinancialGrowthImage } from './images/financial-growth.png';
+export { default as CTAImage } from './images/ytm-cta.png';
 // export { default as LendingIcon } from './services/lending-solutions.svg';
 // export { default as PlanningIcon } from './services/financial-planning.svg';
 // export { default as LegalIcon } from './services/legal-services.svg';
@@ -45,15 +54,19 @@ export { default as SecondaryHeroImage } from './hero/Secondary-Image.jpg';
 // =============================================================================
 
 // Team Member Photos
-// export { default as TeamPhoto } from './team/team-group.jpg';
-// export { default as CEOPhoto } from './team/ceo-headshot.jpg';
-// export { default as ManagerPhoto } from './team/manager-headshot.jpg';
+export { default as AkbarPhoto } from './team/Akbar.jpg';
+export { default as AlmoPhoto } from './team/Almo.jpg';
+export { default as RooheePhoto } from './team/Roohee-final.jpg';
+export { default as SuganPhoto } from './team/Sugan.jpg';
+export { default as TeamPhoto } from './team/default.png';
+
 
 // =============================================================================
 // GENERAL IMAGES
 // =============================================================================
 
 // Background Images
+export { default as AboutPageImage } from './images/about-page.png';
 // export { default as AboutBackground } from './images/about-background.jpg';
 // export { default as ContactBackground } from './images/contact-background.jpg';
 
@@ -65,6 +78,30 @@ export { default as SecondaryHeroImage } from './hero/Secondary-Image.jpg';
 // =============================================================================
 
 // Custom Icons
+export { default as LendingSolutionsIcon } from './icons/lending-solutions-icon.png';
+export { default as FinancialPlanningIcon } from './icons/financial-planning-icon.png';
+export { default as LegalServicesIcon } from './icons/legal-services-icon.png';
+export { default as BusinessInsuranceIcon } from './icons/business-insurance-icon.png';
+export { default as BusinessAdvisoryIcon } from './icons/business-advisory-icon.png';
+export { default as PropertyServicesIcon } from './icons/property-services-icon.png';
+export { default as TickIcon } from './icons/tick-icon.png';
+
+// Contact Icons
+export { default as PhoneIcon } from './icons/phone-icon.png';
+export { default as MailIcon } from './icons/mail-icon.png';
+export { default as LocationIcon } from './icons/location-icon.png';
+
+
+
+
+// Value Icons
+export { default as IntegrityIcon } from './icons/integrity-icon.png';
+export { default as ExcellenceIcon } from './icons/excellence-icon.png';
+export { default as EfficiencyIcon } from './icons/efficiency-icon.png';
+export { default as PartnershipIcon } from './icons/partnership-icon.png';
+export { default as ExpertiseIcon } from './icons/expertise-icon.png';
+export { default as ResultsIcon } from './icons/results-icon.png';
+
 // export { default as CustomIcon } from './icons/custom-icon.svg';
 // export { default as Favicon } from './icons/favicon.ico';
 

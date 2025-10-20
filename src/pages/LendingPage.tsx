@@ -1,7 +1,7 @@
 import React from 'react';
-import { ServicePage, ServiceContactForm } from '@/components';
+import { ServicePage } from '@/components';
 import { getServiceById } from '@/config/services.config';
-import { DocumentTextIcon, CalculatorIcon, ClockIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import { LendingImage } from '@/assets';
 
 const LendingPage: React.FC = () => {
   // Get the lending service data
@@ -11,61 +11,50 @@ const LendingPage: React.FC = () => {
     return <div>Service not found</div>;
   }
 
-  // Define the process steps for lending
-  const processSteps = [
+  // Define service options for lending
+  const serviceOptions = [
     {
-      id: 'consultation',
-      title: 'Initial Consultation',
-      description: 'We discuss your financial goals, current situation, and loan requirements to understand your specific needs.',
-      icon: <DocumentTextIcon className="w-8 h-8 text-blue-600" />
+      title: 'Home Loans',
+      description: 'Tailored lending for first-home buyers, refinancers, and investors — with sharp rates and strategic structure.',
+      tags: ['First Home / Refinance', 'Investment strategies', 'Pre-approval support']
     },
     {
-      id: 'pre-approval',
-      title: 'Pre-Approval Assessment',
-      description: 'Our experts conduct a comprehensive financial assessment to determine your borrowing capacity and loan options.',
-      icon: <CalculatorIcon className="w-8 h-8 text-blue-600" />
+      title: 'Business Loans',
+      description: 'Fuel growth with capital aligned to cash flow — overdrafts, term loans, and flexible repayments.',
+      tags: ['Working capital', 'Expansion & fit-outs', 'Cash-flow aligned']
     },
     {
-      id: 'application',
-      title: 'Loan Application',
-      description: 'We guide you through the application process, ensuring all documentation is complete and accurate for faster processing.',
-      icon: <ClockIcon className="w-8 h-8 text-blue-600" />
+      title: 'Commercial Loans',
+      description: 'There are so many different reasons a business needs finance, and there\'s often a different product for every single one. Allow our Advisers to guide you through them helping you find the appropriate solution.',
+      tags: ['Property acquisition', 'Business expansion', 'Commercial refinance']
     },
     {
-      id: 'approval',
-      title: 'Approval & Settlement',
-      description: 'Once approved, we coordinate with all parties to ensure a smooth settlement process and loan disbursement.',
-      icon: <CheckCircleIcon className="w-8 h-8 text-blue-600" />
+      title: 'Asset Finance',
+      description: 'Acquire vehicles, tech, and equipment while preserving cash — chattel, lease, or hire-purchase.',
+      tags: ['Cars & fleets', 'Tech & machinery', 'Tax-efficient options']
+    },
+    {
+      title: 'SMSF Lending',
+      description: 'Borrow inside your SMSF with compliant structures and lender-ready documentation.',
+      tags: ['LRBA guidance', 'Residential & commercial', 'End-to-end process']
+    },
+    {
+      title: 'Working Capital Finance',
+      description: 'Smooth day-to-day costs with lines of credit, invoice finance, or short-term facilities.',
+      tags: ['Lines of credit', 'Invoice finance', 'Seasonal cover']
+    },
+    {
+      title: 'Asset & Equipment Finance',
+      description: 'Scale operations with structured equipment lending built around usage and depreciation.',
+      tags: ['Heavy equipment', 'Fit-outs', 'Fleet upgrades']
     }
   ];
-
-  // Additional content for the lending service
-  const additionalContent = {
-    overview: `Our lending solutions are designed to help you achieve your property and investment goals with competitive rates and flexible terms. Whether you're a first-time homebuyer, seasoned investor, or business owner looking for commercial financing, our experienced team provides personalized service throughout the entire loan process. We work with a wide network of lenders to find the best rates and terms that match your specific financial situation and objectives.`,
-    whyChooseUs: [
-      'Access to exclusive rates through our extensive lender network',
-      'Dedicated loan specialists with 15+ years of experience',
-      'Streamlined application process with faster approvals',
-      'Ongoing support from application to settlement and beyond',
-      'Transparent fee structure with no hidden costs',
-      'Specialist knowledge in complex lending scenarios'
-    ]
-  };
-
-  // Get related services (excluding current service) - REMOVED: Now handled by GetStartedCTA
-  // const relatedServices = [...] - REMOVED
-
-  // Handle form submission - REMOVED: Now handled by GetStartedCTA
-  // const handleFormSubmit = async (data: any) => {...} - REMOVED
-
-  // Create the contact form component - REMOVED: Now handled by GetStartedCTA
-  // const contactForm = (...) - REMOVED
 
   return (
     <ServicePage
       service={lendingService}
-      processSteps={processSteps}
-      additionalContent={additionalContent}
+      serviceOptions={serviceOptions}
+      heroImage={LendingImage}
     />
   );
 };

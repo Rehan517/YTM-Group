@@ -5,7 +5,7 @@ export interface Service {
   title: string;
   description: string;
   shortDescription?: string;
-  icon: FC<React.SVGProps<SVGSVGElement>>;
+  icon: FC<React.SVGProps<SVGSVGElement>> | string;
   iconLabel: string;
   href: string;
   color: string;

@@ -53,14 +53,5 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   );
 };
 
-// Page loading component with better UX
-export const PageLoader: React.FC = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[400px] space-y-4">
-      <LoadingSpinner size="lg" />
-      <p className="text-neutral-600 text-sm">Loading page...</p>
-    </div>
-  );
-};
 
 export default LoadingSpinner; 

@@ -10,9 +10,11 @@ import {
   EnvelopeIcon,
 } from '@heroicons/react/24/outline';
 import { cn } from '@/utils';
+import { useScrollPosition } from '@/hooks';
 import Container from '@/components/layout/Container';
 import Button from '@/components/atoms/Button';
 import { Link } from '@/components/atoms/Typography';
+import { SERVICES } from '@/config/services.config';
 
 // Define NavigationItem interface
 interface NavigationItem {
@@ -41,6 +43,11 @@ interface HeaderProps {
 // Default navigation structure for YTM Group
 const defaultNavigation: NavigationItem[] = [
   {
+    label: 'Home',
+    href: '/',
+    description: 'Return to homepage',
+  },
+  {
     label: 'About',
     href: '/about',
     description: 'Learn about our company and team',
@@ -49,29 +56,15 @@ const defaultNavigation: NavigationItem[] = [
     label: 'Services',
     href: '/services',
     description: 'Our comprehensive financial and legal services',
-    children: [
-      { label: 'Mortgage Services', href: '/services/mortgage' },
-      { label: 'Financial Planning', href: '/services/finance' },
-      { label: 'Legal Services', href: '/services/legal' },
-      { label: 'Business Advisory', href: '/services/business' },
-      { label: 'Insurance', href: '/services/insurance' },
-      { label: 'Property Services', href: '/services/property' },
-    ],
-  },
-  {
-    label: 'Team',
-    href: '/team',
-    description: 'Meet our experienced professionals',
+    children: SERVICES.map(service => ({
+      label: service.title,
+      href: service.href,
+    })),
   },
   {
     label: 'Testimonials',
     href: '/testimonials',
     description: 'What our clients say about us',
-  },
-  {
-    label: 'Insights',
-    href: '/insights',
-    description: 'Financial insights and market updates',
   },
   {
     label: 'Contact',
@@ -137,15 +130,19 @@ const Header: React.FC<HeaderProps> = ({
     phone: '1800 123 456',
     email: 'info@ytmgroup.com.au',
   },
-  showContact = true,
+  showContact = false,
   sticky = true,
   className,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isScrolled } = useScrollPosition({ threshold: 50 });
 
   const headerClasses = cn(
-    'bg-white border-b border-neutral-200 z-50',
+    'z-50 transition-all duration-300',
     sticky && 'sticky top-0',
+    isScrolled
+      ? 'bg-gray-900 border-b border-gray-700'
+      : 'bg-white border-b border-neutral-200',
     className
   );
 
@@ -187,7 +184,10 @@ const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* Main Navigation */}
-      <nav className="bg-white">
+      <nav className={cn(
+        'transition-colors duration-300',
+        isScrolled ? 'bg-gray-900' : 'bg-white'
+      )}>
         <Container size="2xl" padding="md">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -211,10 +211,12 @@ const Header: React.FC<HeaderProps> = ({
                         <>
                           <Popover.Button
                             className={cn(
-                              'flex items-center text-slate-700 hover:text-primary-600',
+                              'flex items-center transition-colors duration-200 px-3 py-2 rounded-md',
                               'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
-                              'transition-colors duration-200 px-3 py-2 rounded-md',
-                              open && 'text-primary-600'
+                              isScrolled
+                                ? 'text-gray-300 hover:text-white'
+                                : 'text-slate-700 hover:text-primary-600',
+                              open && (isScrolled ? 'text-white' : 'text-primary-600')
                             )}
                           >
                             {item.label}
@@ -234,16 +236,16 @@ const Header: React.FC<HeaderProps> = ({
                             leaveFrom="opacity-100 translate-y-0"
                             leaveTo="opacity-0 translate-y-1"
                           >
-                            <Popover.Panel className="absolute left-0 z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                            <Popover.Panel className="absolute left-0 z-10 mt-2 w-max min-w-46 max-w-sm rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                               <div className="py-1">
                                 {item.children?.map((subItem: NavigationItem) => (
                                   <NavLink
                                     key={subItem.label}
                                     to={subItem.href}
                                     className={({ isActive }) => cn(
-                                      'block px-4 py-2 text-sm transition-colors duration-200',
-                                      isActive 
-                                        ? 'bg-primary-50 text-primary-600' 
+                                      'block px-4 py-2 text-sm transition-colors duration-200 whitespace-nowrap',
+                                      isActive
+                                        ? 'bg-primary-50 text-primary-600'
                                         : 'text-slate-700 hover:bg-neutral-50 hover:text-primary-600'
                                     )}
                                   >
@@ -262,8 +264,8 @@ const Header: React.FC<HeaderProps> = ({
                       className={({ isActive }) => cn(
                         'px-3 py-2 rounded-md transition-colors duration-200',
                         isActive
-                          ? 'text-primary-600 bg-primary-50'
-                          : 'text-slate-700 hover:text-primary-600'
+                          ? (isScrolled ? 'text-white bg-primary-600' : 'text-primary-600 bg-primary-50')
+                          : (isScrolled ? 'text-gray-300 hover:text-white' : 'text-slate-700 hover:text-primary-600')
                       )}
                     >
                       {item.label}
@@ -275,18 +277,27 @@ const Header: React.FC<HeaderProps> = ({
 
             {/* CTA Button and Mobile Menu Button */}
             <div className="flex items-center space-x-4">
-              <Button
-                variant="primary"
-                size="sm"
-                className="hidden sm:inline-flex"
-              >
-                Get Quote
-              </Button>
+              <NavLink to="/contact">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="hidden sm:inline-flex"
+                >
+                  Free Strategy Call
+                </Button>
+
+              </NavLink>
+
 
               {/* Mobile menu button with animated hamburger */}
               <motion.button
                 type="button"
-                className="lg:hidden p-2 rounded-md text-slate-700 hover:text-primary-600 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className={cn(
+                  "lg:hidden p-2 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500",
+                  isScrolled
+                    ? "text-gray-300 hover:text-white hover:bg-gray-800"
+                    : "text-slate-700 hover:text-primary-600 hover:bg-neutral-50"
+                )}
                 onClick={() => setMobileMenuOpen(true)}
                 whileTap={{ scale: 0.95 }}
                 {...({} as any)}
@@ -329,7 +340,7 @@ const Header: React.FC<HeaderProps> = ({
                 onClick: () => setMobileMenuOpen(false)
               } as any)}
             />
-            
+
             {/* Menu Panel */}
             <motion.div
               {...({
@@ -359,7 +370,7 @@ const Header: React.FC<HeaderProps> = ({
                   <XMarkIcon className="h-6 w-6" />
                 </motion.button>
               </div>
-              
+
               <div className="mt-6 flow-root">
                 <div className="-my-6 divide-y divide-neutral-500/10">
                   <motion.div
@@ -427,7 +438,7 @@ const Header: React.FC<HeaderProps> = ({
                       </motion.div>
                     ))}
                   </motion.div>
-                  
+
                   <motion.div
                     {...({
                       className: "py-6",
@@ -441,7 +452,7 @@ const Header: React.FC<HeaderProps> = ({
                       fullWidth
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Get Quote
+                      Free Strategy Call
                     </Button>
                   </motion.div>
                 </div>

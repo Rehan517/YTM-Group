@@ -1,104 +1,46 @@
 import React from 'react';
-import { ServicePage, ServiceContactForm } from '@/components';
+import { ServicePage } from '@/components';
 import { getServiceById } from '@/config/services.config';
-import { 
-  MagnifyingGlassIcon, 
-  DocumentDuplicateIcon, 
-  KeyIcon,
-  BuildingStorefrontIcon
-} from '@heroicons/react/24/outline';
+import { PropertyServicesImage } from '@/assets';
 
 const PropertyServicesPage: React.FC = () => {
   // Get the property services data
-  const propertyService = getServiceById('property-services');
+  const propertyService = getServiceById('property');
 
   if (!propertyService) {
     return <div>Service not found</div>;
   }
 
-  // Define the process steps for property services
-  const processSteps = [
+
+  // Define service options for property services
+  const serviceOptions = [
     {
-      id: 'consultation',
-      title: 'Property Consultation & Needs Analysis',
-      description: 'We begin with a detailed consultation to understand your property goals, investment criteria, and specific requirements.',
-      icon: <MagnifyingGlassIcon className="w-8 h-8 text-emerald-600" />
+      title: 'Property Investment Advisory',
+      description: 'Expert guidance on property investment strategies, market analysis, and portfolio optimisation. Our advisors help identify high-growth opportunities, assess risk factors, and develop tailored investment plans that align with your financial goals and risk tolerance.',
+      tags: ['Investment Strategy', 'Market Analysis', 'Portfolio Growth', 'Risk Assessment']
     },
     {
-      id: 'research',
-      title: 'Market Research & Property Search',
-      description: 'Our team conducts comprehensive market analysis and property searches to identify opportunities that match your criteria.',
-      icon: <DocumentDuplicateIcon className="w-8 h-8 text-emerald-600" />
+      title: 'Portfolio Health Check',
+      description: 'Comprehensive review and analysis of your existing property portfolio performance. We evaluate rental yields, capital growth potential, maintenance costs, and overall portfolio balance to identify optimisation opportunities and underperforming assets.',
+      tags: ['Performance Review', 'Yield Analysis', 'Portfolio Optimisation', 'Asset Assessment']
     },
     {
-      id: 'transaction',
-      title: 'Transaction Management & Negotiation',
-      description: 'We manage the entire transaction process, including negotiations, due diligence, and all legal and financial requirements.',
-      icon: <KeyIcon className="w-8 h-8 text-emerald-600" />
+      title: 'Finance & Structure Liaison',
+      description: 'Strategic financing solutions and optimal ownership structures for property investments. We work with lenders, accountants, and legal professionals to secure competitive financing and establish tax-effective structures for your property portfolio.',
+      tags: ['Property Finance', 'Tax Structures', 'Lending Solutions', 'Professional Network']
     },
     {
-      id: 'management',
-      title: 'Ongoing Property Management',
-      description: 'Comprehensive property management services including tenant relations, maintenance, and investment performance monitoring.',
-      icon: <BuildingStorefrontIcon className="w-8 h-8 text-emerald-600" />
+      title: 'Asset Maintenance Planning',
+      description: 'Proactive maintenance strategies and capital expenditure planning to protect and enhance your property investments. Includes preventive maintenance schedules, renovation planning, and budget forecasting for ongoing property care.',
+      tags: ['Maintenance Strategy', 'Capital Planning', 'Property Care', 'Budget Forecasting']
     }
   ];
-
-  // Additional content for property services
-  const additionalContent = {
-    overview: `Navigate the property market with confidence through our comprehensive property services designed for investors, businesses, and property owners. Our experienced property professionals provide end-to-end solutions covering commercial real estate, residential investments, property management, and strategic property advice. Whether you're acquiring your first investment property or managing a diverse portfolio, we deliver the expertise and personal service you need for success.`,
-    whyChooseUs: [
-      'Extensive local market knowledge across all property sectors',
-      'Licensed property professionals with 20+ years combined experience',
-      'Full-service approach from acquisition to ongoing management',
-      'Strong network of trusted industry professionals and contractors',
-      'Technology-driven property management and reporting systems',
-      'Proven track record in property investment and capital growth',
-      'Transparent fee structure with no hidden costs or surprises',
-      'Personalized service with dedicated property relationship managers'
-    ],
-    specializations: [
-      {
-        title: 'Commercial Real Estate Services',
-        description: 'Complete commercial property solutions including office, retail, industrial, and mixed-use property acquisition, leasing, and management.'
-      },
-      {
-        title: 'Residential Investment Properties',
-        description: 'Residential investment property services covering acquisition, rental management, tenant screening, and portfolio optimization.'
-      },
-      {
-        title: 'Property Management & Maintenance',
-        description: 'Comprehensive property management including tenant relations, maintenance coordination, rent collection, and compliance management.'
-      },
-      {
-        title: 'Property Valuation & Advisory',
-        description: 'Professional property valuations, market analysis, investment advice, and strategic property portfolio planning services.'
-      },
-      {
-        title: 'Property Development & Consulting',
-        description: 'Development project management, feasibility studies, planning approvals, and project delivery for property development initiatives.'
-      },
-      {
-        title: 'Property Finance & Investment Strategy',
-        description: 'Property finance solutions, investment strategy development, and portfolio structuring for optimal returns and tax efficiency.'
-      }
-    ]
-  };
-
-  // Get related services (excluding current service) - REMOVED: Now handled by GetStartedCTA
-  // const relatedServices = [...] - REMOVED
-
-  // Handle form submission - REMOVED: Now handled by GetStartedCTA
-  // const handleFormSubmit = async (data: any) => {...} - REMOVED
-
-  // Create the contact form component - REMOVED: Now handled by GetStartedCTA
-  // const contactForm = (...) - REMOVED
 
   return (
     <ServicePage
       service={propertyService}
-      processSteps={processSteps}
-      additionalContent={additionalContent}
+      serviceOptions={serviceOptions}
+      heroImage={PropertyServicesImage}
     />
   );
 };

@@ -1,12 +1,7 @@
 import React from 'react';
-import { ServicePage, ServiceContactForm } from '@/components';
+import { ServicePage } from '@/components';
 import { getServiceById } from '@/config/services.config';
-import { 
-  ChartBarIcon, 
-  CogIcon, 
-  LightBulbIcon,
-  ArrowTrendingUpIcon
-} from '@heroicons/react/24/outline';
+import { BusinessAdvisoryImage } from '@/assets';
 
 const BusinessAdvisoryPage: React.FC = () => {
   // Get the business advisory service data
@@ -16,89 +11,35 @@ const BusinessAdvisoryPage: React.FC = () => {
     return <div>Service not found</div>;
   }
 
-  // Define the process steps for business advisory
-  const processSteps = [
+  // Define service options for business advisory (4 options based on screenshot)
+  const serviceOptions = [
     {
-      id: 'assessment',
-      title: 'Business Assessment & Analysis',
-      description: 'We conduct a comprehensive evaluation of your business operations, financial performance, market position, and growth opportunities.',
-      icon: <ChartBarIcon className="w-8 h-8 text-indigo-600" />
+      title: 'Strategic Planning',
+      description: 'Unlock your business\'s potential with our strategic planning expertise. We specialize in crafting personalized strategies to maximize profitability and achieve long-term growth goals. Let us guide your business toward financial success with clarity and confidence. Start strategically planning for your company\'s future today.',
+      tags: ['Growth strategy', 'Business planning', 'Long-term goals']
     },
     {
-      id: 'strategy',
-      title: 'Strategic Planning & Development',
-      description: 'Our experts develop tailored strategies addressing your specific business challenges, market opportunities, and growth objectives.',
-      icon: <LightBulbIcon className="w-8 h-8 text-indigo-600" />
+      title: 'Financial Analysis',
+      description: 'Achieve clarity and confidence in your business\'s financial strategy through our comprehensive analysis. Let us collaborate to optimize your financial performance.',
+      tags: ['Financial strategy', 'Performance optimization', 'Data analysis']
     },
     {
-      id: 'implementation',
-      title: 'Implementation & Execution',
-      description: 'We work alongside your team to implement strategic initiatives, optimize processes, and drive measurable business improvements.',
-      icon: <CogIcon className="w-8 h-8 text-indigo-600" />
+      title: 'Risk Management',
+      description: 'Partner with us to develop a proactive strategy tailored to safeguard your assets and ensure stability. Leverage our expertise to confidently navigate future challenges, securing your business\'s peace of mind today.',
+      tags: ['Asset protection', 'Business stability', 'Risk mitigation']
     },
     {
-      id: 'growth',
-      title: 'Growth Monitoring & Optimization',
-      description: 'Ongoing performance monitoring, strategy refinement, and continuous optimization to ensure sustained business growth and success.',
-      icon: <ArrowTrendingUpIcon className="w-8 h-8 text-indigo-600" />
+      title: 'Operational Improvement',
+      description: 'Unlock your business\'s full potential with our operational improvement expertise. We specialise in optimising processes and enhancing efficiency to drive growth and profitability. Partner with us for a brighter financial future.',
+      tags: ['Process optimization', 'Efficiency enhancement', 'Growth acceleration']
     }
   ];
-
-  // Additional content for business advisory
-  const additionalContent = {
-    overview: `Transform your business with strategic advisory services designed to accelerate growth and maximize profitability. Our experienced business consultants bring deep industry knowledge and proven methodologies to help you navigate challenges, capitalize on opportunities, and achieve sustainable success. Whether you're a startup seeking rapid growth or an established business looking to optimize operations, we provide the strategic guidance and practical solutions you need.`,
-    whyChooseUs: [
-      'Proven track record with 200+ successful business transformations',
-      'Industry-specific expertise across multiple business sectors',
-      'Data-driven approach with measurable ROI and performance metrics',
-      'Experienced consultants with C-level executive backgrounds',
-      'Flexible engagement models from project-based to ongoing advisory',
-      'Strategic partnerships with leading technology and service providers',
-      'Comprehensive support from strategy to implementation and beyond',
-      'Local market knowledge with global business best practices'
-    ],
-    specializations: [
-      {
-        title: 'Strategic Planning & Business Development',
-        description: 'Comprehensive business planning, market analysis, competitive positioning, and growth strategy development for sustainable expansion.'
-      },
-      {
-        title: 'Operational Excellence & Process Optimization',
-        description: 'Business process improvement, operational efficiency enhancement, workflow optimization, and performance management systems.'
-      },
-      {
-        title: 'Financial Management & Performance Analysis',
-        description: 'Financial planning, cash flow optimization, cost management, profitability analysis, and financial performance improvement.'
-      },
-      {
-        title: 'Digital Transformation & Technology Strategy',
-        description: 'Technology adoption planning, digital transformation roadmaps, system integration, and automation implementation strategies.'
-      },
-      {
-        title: 'Market Entry & Expansion Strategy',
-        description: 'Market research, competitive analysis, market entry strategies, and expansion planning for new markets and opportunities.'
-      },
-      {
-        title: 'Merger & Acquisition Advisory',
-        description: 'M&A strategy, due diligence support, valuation analysis, integration planning, and post-merger optimization services.'
-      }
-    ]
-  };
-
-  // Get related services (excluding current service) - REMOVED: Now handled by GetStartedCTA
-  // const relatedServices = [...] - REMOVED
-
-  // Handle form submission - REMOVED: Now handled by GetStartedCTA
-  // const handleFormSubmit = async (data: any) => {...} - REMOVED
-
-  // Create the contact form component - REMOVED: Now handled by GetStartedCTA
-  // const contactForm = (...) - REMOVED
 
   return (
     <ServicePage
       service={businessAdvisoryService}
-      processSteps={processSteps}
-      additionalContent={additionalContent}
+      serviceOptions={serviceOptions}
+      heroImage={BusinessAdvisoryImage}
     />
   );
 };

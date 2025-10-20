@@ -1,11 +1,4 @@
-import {
-  CreditCardIcon,
-  ChartBarIcon,
-  ScaleIcon,
-  ShieldCheckIcon,
-  LightBulbIcon,
-  HomeIcon
-} from '@heroicons/react/24/outline';
+import { LendingSolutionsIcon, FinancialPlanningIcon, LegalServicesIcon, BusinessInsuranceIcon, BusinessAdvisoryIcon, PropertyServicesIcon } from '@/assets';
 
 import type { Service, ServiceCategory } from '@/types/services';
 
@@ -18,13 +11,13 @@ export const SERVICES: Service[] = [
   {
     id: 'lending',
     title: 'Lending Solutions',
-    description: 'Comprehensive lending services including residential, commercial, and investment property loans with competitive rates and personalized service.',
+    description: 'Comprehensive lending services including residential, commercial, and investment property loans with competitive rates and personalised service.',
     shortDescription: 'Residential, commercial, and investment property loans with competitive rates.',
-    icon: CreditCardIcon,
-    iconLabel: 'Credit card icon representing lending and financial services',
+    icon: LendingSolutionsIcon,
+    iconLabel: '3D lending solutions icon representing comprehensive lending and financial services',
     href: '/services/lending',
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-100',
     category: 'financial',
     features: [
       'Residential home loans',
@@ -36,7 +29,7 @@ export const SERVICES: Service[] = [
     benefits: [
       'Competitive interest rates',
       'Fast approval process',
-      'Personalized service',
+      'Personalised service',
       'Flexible repayment terms'
     ]
   },
@@ -45,11 +38,11 @@ export const SERVICES: Service[] = [
     title: 'Financial Planning',
     description: 'Expert financial planning services to help you build wealth, plan for retirement, and secure your financial future with tailored strategies.',
     shortDescription: 'Expert wealth building and retirement planning with tailored strategies.',
-    icon: ChartBarIcon,
-    iconLabel: 'Chart bar icon representing financial planning and growth',
+    icon: FinancialPlanningIcon,
+    iconLabel: '3D financial planning icon representing wealth building and financial growth',
     href: '/services/financial-planning',
-    color: 'text-green-600',
-    bgColor: 'bg-green-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-100',
     category: 'financial',
     features: [
       'Retirement planning',
@@ -70,11 +63,11 @@ export const SERVICES: Service[] = [
     title: 'Legal Services',
     description: 'Professional legal services covering business law, property transactions, estate planning, and litigation support with experienced attorneys.',
     shortDescription: 'Business law, property transactions, and estate planning services.',
-    icon: ScaleIcon,
-    iconLabel: 'Scale icon representing legal services and justice',
+    icon: LegalServicesIcon,
+    iconLabel: '3D legal services icon representing legal services and justice',
     href: '/services/legal',
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-100',
     category: 'legal',
     features: [
       'Business law',
@@ -93,13 +86,13 @@ export const SERVICES: Service[] = [
   {
     id: 'business-insurance',
     title: 'Business Insurance',
-    description: 'Comprehensive business insurance solutions to protect your company, employees, and assets with customized coverage options.',
+    description: 'Comprehensive business insurance solutions to protect your company, employees, and assets with customised coverage options.',
     shortDescription: 'Comprehensive business insurance to protect your company and assets.',
-    icon: ShieldCheckIcon,
-    iconLabel: 'Shield check icon representing business insurance and protection',
+    icon: BusinessInsuranceIcon,
+    iconLabel: '3D Shield check icon representing business insurance and protection',
     href: '/services/business-insurance',
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-100',
     category: 'business',
     features: [
       'General liability insurance',
@@ -120,11 +113,11 @@ export const SERVICES: Service[] = [
     title: 'Business Advisory',
     description: 'Strategic business advisory services to help grow your business, improve operations, and achieve sustainable success.',
     shortDescription: 'Strategic advisory services to grow your business and improve operations.',
-    icon: LightBulbIcon,
-    iconLabel: 'Light bulb icon representing business advisory and strategic insights',
+    icon: BusinessAdvisoryIcon,
+    iconLabel: '3D business advisory icon representing business advisory and strategic insights',
     href: '/services/business-advisory',
-    color: 'text-yellow-600',
-    bgColor: 'bg-yellow-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-100',
     category: 'business',
     features: [
       'Strategic planning',
@@ -145,11 +138,11 @@ export const SERVICES: Service[] = [
     title: 'Property Services',
     description: 'End-to-end property services including investment advice, property management, and real estate transactions.',
     shortDescription: 'Investment advice, property management, and real estate transactions.',
-    icon: HomeIcon,
-    iconLabel: 'Home icon representing property services and real estate',
+    icon: PropertyServicesIcon,
+    iconLabel: '3D Home icon representing property services and real estate',
     href: '/services/property',
-    color: 'text-indigo-600',
-    bgColor: 'bg-indigo-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-100',
     category: 'property',
     features: [
       'Property investment advice',
