@@ -27,7 +27,7 @@ export const DEFAULT_SEO: PageSEO = {
 export const PAGE_SEO: Record<string, PageSEO> = {
   // Homepage
   home: {
-    title: 'Build Wealth That Lasts Generations | YTM Group Australia',
+    title: 'YTM Group - Professional Financial Services',  // ← Changed this line
     description: 'Transform your financial future with personalized strategies from Australia\'s leading financial planners. Tax-optimized investments, estate planning & more. Free consultation.',
     keywords: 'financial planning Australia, wealth management Melbourne, tax optimization, estate planning, retirement planning, mortgage brokers',
     canonical: SITE_URL,
